@@ -1,42 +1,56 @@
 package com.understanding.springmvc.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "jedi")
 public class Jedi {
 
-    //Jedi attributes
-    @NotBlank
+    @Id
+    @Column(name="id_jedi")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Size(min = 3, max = 10, message = "Nome deve conter entre 3 e 10 caracteres")
+    @NotBlank(message = "Nome não pode estar em branco")
+    @Column(name = "name")
     private String name;
-    @NotBlank
+
+    @NotBlank(message = "Sobrenome não pode estar em branco")
+    @Column(name = "last_name")
     private String lastName;
 
-    //Name getter
-    public String getName() {
+    public Jedi (final String name, final String lastname) {
+        this.name = name;
+        this.lastName = lastname;
+    }
+
+    public Jedi () {
+    }
+
+    public String getName () {
         return name;
     }
 
-    //Name setter
-    public void setName(String name) {
+    public void setName (final String name) {
         this.name = name;
     }
 
-    //Lastname getter
-    public String getLastName() {
+    public String getLastName () {
         return lastName;
     }
 
-    //Lastname setter
-    public void setLastName(String lastName) {
+    public void setLastName (final String lastName) {
         this.lastName = lastName;
     }
 
-    //Jedi constructor with no params
-    public Jedi() {
+    public Long getId() {
+        return id;
     }
 
-    //Jedi constructor with all params
-    public Jedi(final String name, final String lastName) {
-        this.name = name;
-        this.lastName = lastName;
+    public void setId(final Long id) {
+        this.id = id;
     }
 }

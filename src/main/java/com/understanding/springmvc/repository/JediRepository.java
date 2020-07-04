@@ -1,27 +1,14 @@
 package com.understanding.springmvc.repository;
 
-import com.understanding.springmvc.model.Jedi;
-import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import com.understanding.springmvc.model.Jedi;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 @Repository
-public class JediRepository {
+public interface JediRepository extends JpaRepository<Jedi, Long> {
 
-    //Jedi instances list
-    private List<Jedi> jediList = new ArrayList<>();
+    List<Jedi> findByNameContainingIgnoreCase(final String name);
 
-    //Jedi constructor
-    public JediRepository() {
-        jediList.add(new Jedi("Luke", "Skywalker"));
-    }
-
-    public List<Jedi> getAllJedi() {
-        return this.jediList;
-    }
-
-    public void addJedi(final Jedi jedi) {
-        this.jediList.add(jedi);
-    }
 }
